@@ -1,24 +1,41 @@
 var pkg = require('./package.json');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-    module.exports = {
-        resolve: {
-            extensions: ['', '.jsx', '.js']
-        },
+module.exports = {
+    resolve: {
+        extensions: ['', '.jsx', '.js']
+    },
 
-        entry: './src/components/app.jsx',
+    entry: './src/components/app.jsx',
 
-        output: {
-            path: './build/js',
-            filename: 'app.js'
-        },
+    output: {
+        path: './build/js',
+        filename: 'app.js'
+    },
 
-        module: {
-            loaders: [
-                {
-                    test: /(\.js|\.jsx)$/,
-                    loader: 'babel',
-                    query: { presets: ['es2015', 'stage-0', 'react'] }
-                }
-            ]
-        }
-    };
+    devtool: 'source-map',
+
+    module: {
+        loaders: [
+            {
+                test: /(\.js|\.jsx)$/,
+                loader: 'babel',
+                query: { presets: ['es2015', 'stage-0', 'react'] }
+            },
+
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+                //ExtractTextPlugin.extract('css!sass')
+            }
+
+        ]
+    },
+
+     plugins: [
+        new ExtractTextPlugin('build/css/style.css', {
+            allChunks: true
+        })
+    ]
+
+};
