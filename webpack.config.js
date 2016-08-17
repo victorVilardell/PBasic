@@ -1,22 +1,24 @@
-var pkg = require('./package.json');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    resolve: {
-        extensions: ['', '.jsx', '.js']
-    },
 
     entry: './src/components/app.jsx',
 
     output: {
         path: './build/js',
-        filename: 'app.js'
+        filename: '[name].js'
     },
 
     devtool: 'source-map',
 
     module: {
         loaders: [
+             {
+                test: /(\.js|\.jsx)$/,
+                exclude: /(node_modules)/,
+                loader: 'react-hot'
+            },
+
             {
                 test: /(\.js|\.jsx)$/,
                 loader: 'babel',
@@ -25,10 +27,8 @@ module.exports = {
 
             {
                 test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-                //ExtractTextPlugin.extract('css!sass')
+                loader: ExtractTextPlugin.extract('css!sass')
             }
-
         ]
     },
 
