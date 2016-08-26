@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Hello from './hello/index.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Gallery from './gallery/index.jsx'
 
-ReactDOM.render(<Hello name='React' />, document.getElementById('container'))
+ReactDOM.render(<Gallery />, document.getElementById('container'))

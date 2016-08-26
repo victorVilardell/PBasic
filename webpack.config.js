@@ -3,7 +3,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 
     entry: {
-        hello: './src/components/app.jsx'
+        gallery: './src/components/app.jsx'
     },
 
     output: {
@@ -30,6 +30,11 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: ExtractTextPlugin.extract('css!sass')
+            },
+
+            {
+                test: /(\.jpg|\.png)$/,
+                loader: "url-loader?limit=10000"
             }
         ]
     },
